@@ -15,10 +15,13 @@ LINE = (
 
 
 def main() -> None:
+    line = LINE.strip()
+    assert "\n" not in line and "\r" not in line, "pitch must be a single line"
+    assert 1 <= len(line) <= 240, f"pitch must be 1-240 chars, got {len(line)}"
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as fh:
-        fh.write(LINE + "\n")
+        fh.write(line + "\n")
 
 
 if __name__ == "__main__":
